@@ -29,6 +29,9 @@ if ingredients_list:
     for fruit_chosen in ingredients_list:
         INGREDIENTS_STRING += fruit_chosen + ' '
         st.subheader(fruit_chosen + ' Nutrition Information')
+        my_select_stmt = """select search_on from smoothies.public.FRUIT_OPTIONS where fruit_name = '""" + fruit_chosen + """'"""
+        test = session.sql(my_insert_stmt).collect()
+        st.subheader(test + ' this')
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_chosen)
         fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
 
